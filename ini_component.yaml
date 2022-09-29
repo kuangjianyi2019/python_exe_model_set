@@ -1,0 +1,43 @@
+botton:
+  -
+    name:
+    frame:
+    func:
+    pack:
+
+combobox:
+  -
+    name:
+    frame:
+    func:
+    pack:
+frame:
+  -
+    name:
+    frame:
+    func:
+    pack:
+label:
+  -
+    name:
+    frame:
+    func:
+    pack:
+labelframe:
+  -
+    name:
+    frame:
+    func:
+    pack:
+text:
+  -
+    name:
+    frame:
+    func:
+    pack:
+radiobutton:
+  -
+    name:
+    frame:
+    func:
+    pack:
