@@ -7,9 +7,6 @@ import tkinter
 import typing
 from tkinter import ttk
 from typing import Dict
-from typing import Union
-from typing import Optional
-from typing import Callable
 from tkinter import *
 from util.util import load_yaml
 from board.component_func import ComponentFun
@@ -68,6 +65,7 @@ class IniComponent():
         '''反射构建组件对象'''
         if flag == 1 :
             if hasattr(obj, method_name):
+
                 obj_func = getattr(obj, method_name)
                 return obj_func(*args)
         else:

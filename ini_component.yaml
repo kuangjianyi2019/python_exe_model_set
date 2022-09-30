@@ -8,12 +8,16 @@ frame:
 
 #labelframe框
 labelframe:
-
+  div2:
+    frame: frame-div1
+    text: 圆圈
+    pack: 0
 
 #按钮
 botton:
   test_botton1:
-    frame: frame-div1
+    frame: labelframe-div2
+    text: 点击
     func: message_box
     pack: 0
 
