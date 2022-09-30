@@ -1,43 +1,35 @@
-botton:
-  -
-    name:
-    frame:
-    func:
-    pack:
+#frame为0，代表使用的是TK，frame写法为 frame类型-frame名称,pack使用0代表默认，
 
-combobox:
-  -
-    name:
-    frame:
-    func:
-    pack:
+#frame框
 frame:
-  -
-    name:
-    frame:
-    func:
-    pack:
-label:
-  -
-    name:
-    frame:
-    func:
-    pack:
+  div1:
+    frame: 0
+    pack: 0
+
+#labelframe框
 labelframe:
-  -
-    name:
-    frame:
-    func:
-    pack:
+
+
+#按钮
+botton:
+  test_botton1:
+    frame: frame-div1
+    pack: 0
+
+#下拉框
+combobox:
+
+#文本
+label:
+
+
+#拖拉条
+scrollbar:
+
+
+#文本框
 text:
-  -
-    name:
-    frame:
-    func:
-    pack:
+
+
+#单选框
 radiobutton:
-  -
-    name:
-    frame:
-    func:
-    pack:
