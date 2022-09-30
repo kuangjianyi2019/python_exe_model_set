@@ -12,7 +12,7 @@ from typing import Optional
 from typing import Callable
 from tkinter import *
 from util.util import load_yaml
-
+from board.component_func import ComponentFun
 
 class IniComponent():
     dict_botton: Dict[str, Button] = {}
@@ -28,6 +28,7 @@ class IniComponent():
 
     def __init__(self, tk: tkinter.Tk):
         self.tk = tk
+        self.ct=ComponentFun(self.tk)
         self.component_yaml_config = load_yaml('ini_component')
         self.save_component_obj()
         self.set_component_config()
@@ -63,12 +64,12 @@ class IniComponent():
         ini_scrollbar = Scrollbar()
         return ini_scrollbar
 
-    def get_obj_property(self, method_name, flag=1):
+    def get_obj_property(self,obj,method_name, flag=1,*args):
         '''反射构建组件对象'''
-        if flag == 1:
-            if hasattr(self, method_name):
-                obj_func = getattr(self, method_name)
-                return obj_func()
+        if flag == 1 :
+            if hasattr(obj, method_name):
+                obj_func = getattr(obj, method_name)
+                return obj_func(*args)
         else:
             if hasattr(self, 'dict_' + method_name):
                 obj_variable = getattr(self, 'dict_' + method_name)
@@ -81,15 +82,15 @@ class IniComponent():
             if many_component_config:
 
                 for component_name in many_component_config:
-                    component = self.get_obj_property(component_type)
-                    component_variable = self.get_obj_property(component_type, flag=2)
+                    component = self.get_obj_property(self,component_type)
+                    component_variable = self.get_obj_property(self,component_type, flag=2)
                     self.record_has_save_component.add(component_type)
                     component_variable[component_name] = component
 
     def set_component_config(self):
         '''给组件设置属性'''
         for component_type in self.record_has_save_component:
-            many_component_obj = self.get_obj_property(component_type, flag=2)
+            many_component_obj = self.get_obj_property(self,component_type, flag=2)
             many_component_config = self.component_yaml_config.get(component_type)
 
             # 获取已创建的组件dict
@@ -104,15 +105,14 @@ class IniComponent():
                 else:
                     # 获取对应的frame
                     frame_parms = component_frame_parms.split('-')
-                    swap_many_component_obj = self.get_obj_property(frame_parms[0], flag=2)
+                    swap_many_component_obj = self.get_obj_property(self,frame_parms[0], flag=2)
                     single_component_obj.master = swap_many_component_obj.get(frame_parms[1])
 
                 if component_text_parms:
                     single_component_obj.config(text=component_text_parms)
 
-                #todo 方法传入
                 if component_func_parms:
-                    single_component_obj.config(command=print)
+                    single_component_obj.config(command=lambda :self.get_obj_property(self.ct,component_func_parms))
 
                 if component_pack_parms == 0:
                     single_component_obj.pack()

@@ -14,6 +14,7 @@ labelframe:
 botton:
   test_botton1:
     frame: frame-div1
+    func: message_box
     pack: 0
 
 #下拉框
